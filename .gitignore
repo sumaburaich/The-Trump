@@ -52,4 +52,6 @@ Thumbs.db
 *.xcworkspace
 *.ipa
 
+Assets/Resources/Font/Font Asset/NotoSansJP-Regular SDF.asset
+
 # ========== end ==========
