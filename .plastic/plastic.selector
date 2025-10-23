@@ -1,0 +1,4 @@
+repository "the trump/the trump@15668373211239@cloud"
+  path "/"
+    br "/main"
+    co "/main"
