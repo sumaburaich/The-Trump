@@ -1,0 +1,54 @@
+# ========== Unity.gitignore ==========
+
+# Unity生成フォルダ（再生成可能）
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+UserSettings/
+
+# アセットストアツールなど
+Assets/AssetStoreTools*
+
+# JetBrains Rider
+/[Aa]ssets/Plugins/Editor/JetBrains*
+
+# Visual Studio / VSCode
+.vscode/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+
+# Unity Cloud / Collab 関連
+.collabignore
+
+# OS生成ファイル
+.DS_Store
+Thumbs.db
+
+# プロファイラ関連
+*.profiler
+
+# ビルド出力フォルダ
+[Bb]uilds/
+
+# 他プラットフォーム固有ファイル
+*.apk
+*.aab
+*.xcodeproj
+*.xcworkspace
+*.ipa
+
+# ========== end ==========
