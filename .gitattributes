@@ -8,4 +8,3 @@ Assets/**/*.fbx filter=lfs diff=lfs merge=lfs -text
 Assets/**/*.prefab filter=lfs diff=lfs merge=lfs -text
 Assets/**/*.mp4 filter=lfs diff=lfs merge=lfs -text
 Assets/**/*.mp3 filter=lfs diff=lfs merge=lfs -text
-Assets/Resources/Font/Font[[:space:]]Asset/NotoSansJP-Regular[[:space:]]SDF.asset filter=lfs diff=lfs merge=lfs -text
