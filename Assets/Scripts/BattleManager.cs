@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,10 +17,12 @@ public class BattleManager : MonoBehaviour
     public int lose_num;
     public enter_discard ed;
     public HandManager en_hand;
+    public HandManager pl_hand;
     public FieldDropHandler field_drop;
     public ResultManager rm;
     public bool pl_boost;
     public bool en_boost;
+    public List<int> first_cards;
 
 
     void Update()
@@ -109,10 +112,13 @@ public class BattleManager : MonoBehaviour
         card_state enemy_state = enable_obj[2].GetComponent<card_state>();
 
         //カード選定(乱数)
-        int rnd = (int)Random.Range(0, enemy_hand.cs.Count);
-        enemy_state.card_num = enemy_hand.cs[rnd].card_num;
-        en_state = enemy_hand.cs[rnd].card_num;
-        enemy_state.is_boost = enemy_hand.cs[rnd].is_boost;
+
+
+        //int rnd = (int)Random.Range(0, enemy_hand.cs.Count);
+        int choice_num = ChoiceCardAIIdiot(enemy_hand);
+        enemy_state.card_num = enemy_hand.cs[choice_num].card_num;
+        en_state = enemy_hand.cs[choice_num].card_num;
+        enemy_state.is_boost = enemy_hand.cs[choice_num].is_boost;
 
         //準ジョーカーの有効化、数字の更新
         enemy_state.TMP_Reflection();
@@ -128,13 +134,77 @@ public class BattleManager : MonoBehaviour
         }
 
         //敵の手札の情報削除、手札の並び調整
-        GameObject destoroy_obj = enemy_hand.cs[rnd].gameObject;
-        enemy_hand.cs.Remove(enemy_hand.cs[rnd]);
-        enemy_hand.hand_cards.Remove(enemy_hand.hand_cards[rnd]);
+        GameObject destoroy_obj = enemy_hand.cs[choice_num].gameObject;
+        enemy_hand.cs.Remove(enemy_hand.cs[choice_num]);
+        enemy_hand.hand_cards.Remove(enemy_hand.hand_cards[choice_num]);
         Destroy(destoroy_obj);
         enemy_hand.UpdateHandLayoutInstant();
     }
 
+    public int ChoiceCardAIIdiot(HandManager en_hand)
+    {
+        int max = 0;
+        card_state[] en_cs = new card_state[5];
+
+        for (int i = 0; i < en_hand.hand_cards.Count; i++)
+        {
+            en_cs[i] = en_hand.cs[i];
+
+            if (en_cs[i].card_num > en_cs[max].card_num)
+            {
+                max = i;
+            }
+        }
+
+
+        return max;
+    }
+    public int ChoiceCardAI()
+    {
+        int num = 0;
+        card_state[] hand_cards = new card_state[5];
+
+        for (int i = 0; i < hand_cards.Length; i++)
+        {
+            //ジョーカーを持っていたら出す
+            if (hand_cards[i].card_num == 14)
+            {
+                num = i;
+                break;
+            }
+
+            //準ジョーカーを持っていたら出す
+            else if (hand_cards[i].is_boost)
+            {
+                num = i;
+                break;
+            }
+
+            else if (hand_cards[i].card_num >= 11)
+            {
+                //相手が1,2,3を持っていないかったら13～11を出す
+                if (first_cards != null)
+                {
+                    for (int j = 0; j < first_cards.Count; j++)
+                    {
+                        if (first_cards[j] <= 3)
+                        {
+
+                        }
+                    }
+                }
+            }
+        }
+
+
+        return num;
+    }
+
+    //最初にプレイヤーが持っていたカードを記録する関数(ディスカードした後の時点)
+    public void MemoryFirstCrads(card_state memory_card)
+    {
+        first_cards.Add(memory_card.card_num);
+    }
 
     //勝敗判定関数
     public IEnumerator Decision(float wait_time, int enemy_num, int player_num, FieldDropHandler fdh)

@@ -6724,10 +6724,12 @@ MonoBehaviour:
   lose_num: 0
   ed: {fileID: 2144366103}
   en_hand: {fileID: 1418327952}
+  pl_hand: {fileID: 1588820644}
   field_drop: {fileID: 518444077}
   rm: {fileID: 1225209981}
   pl_boost: 0
   en_boost: 0
+  first_cards: 
 --- !u!1 &1418327950
 GameObject:
   m_ObjectHideFlags: 0
@@ -8210,7 +8212,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1777412288
 RectTransform:
   m_ObjectHideFlags: 0
